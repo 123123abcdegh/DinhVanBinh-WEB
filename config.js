@@ -6,13 +6,13 @@
 const CONFIG = {
     // ===== THÔNG TIN CÁ NHÂN =====
     name: "Đinh Văn Bính",
-    title: "Lập Trình Viên Full Stack",
-    email: "dinhvanbinh.dev@gmail.com",
-    address: "Việt Nam",
+    title: "",
+    email: "dinhvb162005@gmail.com",
+    address: "Thu Cúc - Tân Sơn - Phú Thọ",
     birthDate: "16/09/2005",
     status: "Đang học",
     specialty: "Web & Game",
-    description: `Một lập trình viên đam mê về Full Stack Development và Game Development đến từ Việt Nam. 
+    description: `Tui ở Tân Sơn - Phú Thọ. 
                         Tôi yêu thích việc tạo ra những trải nghiệm kỹ thuật số đẹp mắt, chức năng và đầy ấn tượng.`,
     description2: `Với con mắt tinh tế về thiết kế và niềm đam mê với code sạch, tôi luôn cố gắng xây dựng 
                         những ứng dụng không chỉ đẹp về mặt thị giác mà còn hiệu quả cao và thân thiện với người dùng.`,
@@ -60,13 +60,13 @@ const CONFIG = {
 
     // ===== LIÊN HỆ =====
     contact: {
-        intro: "Tôi luôn hào hứng khi được làm việc trên các dự án mới và hợp tác với những người sáng tạo. Dù bạn có một dự án trong đầu hay chỉ muốn chào hỏi, đừng ngần ngại liên hệ!",
+        intro: "Tui xài AI. Dù bạn có một dự án trong đầu hay chỉ muốn chào hỏi, đừng ngần ngại liên hệ!",
         projectStatus: "Sẵn sàng cho dự án"
     },
 
     // ===== SEO =====
     seo: {
-        description: "Đinh Văn Bính - Lập trình viên Full Stack & Game Developer Portfolio. Chuyên phát triển web và game với đam mê và kỹ năng.",
+        description: "Đinh Văn Bính - Chuyên phát triển web và game với đam mê và vibe coding.",
         keywords: "portfolio, lập trình viên, web developer, game developer, Việt Nam, full stack, javascript, php"
     }
 };
