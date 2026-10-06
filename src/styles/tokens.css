@@ -1,0 +1,570 @@
+/* ============================================================
+   TOKENS · RESET · BASE · UTILITIES
+   Bảng màu pastel cao cấp, hỗ trợ Sáng / Tối.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* --- Bề mặt --- */
+  --canvas: #f5f3fd;
+  --canvas-glow-1: rgba(167, 139, 250, 0.38);
+  --canvas-glow-2: rgba(247, 168, 208, 0.32);
+  --canvas-glow-3: rgba(107, 214, 190, 0.24);
+  --surface: #ffffff;
+  --surface-2: #faf9ff;
+  --surface-3: #f1eefb;
+  --nav-bg: rgba(255, 255, 255, 0.72);
+
+  /* --- Chữ --- */
+  --ink: #171533;
+  --ink-2: #302d4e;
+  --muted: #67638a;
+  --muted-2: #8f8bb0;
+
+  /* --- Đường viền --- */
+  --line: rgba(23, 21, 51, 0.09);
+  --line-strong: rgba(23, 21, 51, 0.16);
+
+  /* --- Màu thương hiệu --- */
+  --brand: #7c5cf6;
+  --brand-2: #a78bfa;
+  --brand-ink: #5636cf;
+  --brand-tint: rgba(124, 92, 246, 0.1);
+  --pink: #f278bd;
+  --mint: #43c9a4;
+  --sky: #5aa9f5;
+  --peach: #ff9f6e;
+
+  --grad-brand: linear-gradient(135deg, #8b7bf7 0%, #b79cf6 52%, #f7a8d0 100%);
+  --grad-text: linear-gradient(120deg, #6d4df0 0%, #a78bfa 45%, #f278bd 100%);
+
+  /* --- Đổ bóng --- */
+  --sh-1: 0 1px 2px rgba(23, 21, 51, 0.04), 0 2px 8px rgba(23, 21, 51, 0.04);
+  --sh-2: 0 4px 12px rgba(23, 21, 51, 0.05), 0 14px 34px -14px rgba(23, 21, 51, 0.14);
+  --sh-3: 0 30px 70px -30px rgba(23, 21, 51, 0.28), 0 10px 28px -18px rgba(23, 21, 51, 0.14);
+  --sh-brand: 0 14px 34px -14px rgba(124, 92, 246, 0.6);
+
+  /* --- Bo góc --- */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-2xl: 36px;
+  --r-full: 999px;
+
+  /* --- Chuyển động --- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 0.16s;
+  --t: 0.28s;
+  --t-slow: 0.6s;
+
+  /* --- Khác --- */
+  --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --nav-h: 72px;
+  --container: 1180px;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --canvas: #0a0913;
+  --canvas-glow-1: rgba(124, 92, 246, 0.3);
+  --canvas-glow-2: rgba(242, 120, 189, 0.2);
+  --canvas-glow-3: rgba(67, 201, 164, 0.16);
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface-2: rgba(255, 255, 255, 0.07);
+  --surface-3: rgba(255, 255, 255, 0.11);
+  --nav-bg: rgba(12, 11, 22, 0.72);
+
+  --ink: #f4f2ff;
+  --ink-2: #ded9f7;
+  --muted: #a6a1c8;
+  --muted-2: #7f7aa3;
+
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.2);
+
+  --brand: #a48bff;
+  --brand-2: #c4b0ff;
+  --brand-ink: #c3b2ff;
+  --brand-tint: rgba(164, 139, 255, 0.16);
+
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --sh-2: 0 10px 30px -12px rgba(0, 0, 0, 0.7);
+  --sh-3: 0 34px 80px -34px rgba(0, 0, 0, 0.85);
+  --sh-brand: 0 16px 40px -16px rgba(124, 92, 246, 0.7);
+}
+
+/* ============================ RESET ============================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 20px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(124, 92, 246, 0.28);
+}
+
+/* Thanh cuộn mảnh cho gọn gàng */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: var(--r-full);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-2);
+  background-clip: content-box;
+}
+
+/* ============================ BASE ============================ */
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+p {
+  color: var(--muted);
+}
+
+::placeholder {
+  color: var(--muted-2);
+  opacity: 1;
+}
+
+/* =========================== UTILITIES =========================== */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+.section--tint {
+  background: linear-gradient(180deg, transparent, var(--surface-2) 18%, var(--surface-2) 82%, transparent);
+}
+
+.grad-text {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.lead {
+  font-size: clamp(1rem, 0.5vw + 0.92rem, 1.125rem);
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--r-md);
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: var(--sh-2);
+  transition: top var(--t) var(--ease);
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Nhãn nhỏ phía trên tiêu đề mục */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem 0.4rem 0.6rem;
+  border-radius: var(--r-full);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-1);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--brand-ink);
+}
+
+.eyebrow svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--brand);
+}
+
+/* Khối tiêu đề của mỗi mục */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.section-head--left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.section-head h2 {
+  font-size: clamp(1.85rem, 3.4vw, 2.9rem);
+  font-weight: 800;
+  max-width: 20ch;
+}
+
+.section-head p {
+  font-size: clamp(0.98rem, 0.4vw + 0.9rem, 1.08rem);
+  max-width: 56ch;
+}
+
+/* =========================== NÚT =========================== */
+.btn {
+  --btn-bg: var(--surface);
+  --btn-fg: var(--ink);
+  --btn-border: var(--line);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--r-full);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease),
+    background-color var(--t) var(--ease), border-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+.btn svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sh-2);
+  border-color: var(--line-strong);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--primary {
+  --btn-bg: var(--grad-brand);
+  --btn-fg: #fff;
+  --btn-border: transparent;
+  box-shadow: var(--sh-brand);
+}
+.btn--primary:hover {
+  box-shadow: 0 18px 42px -16px rgba(124, 92, 246, 0.75);
+}
+
+.btn--ghost:hover {
+  border-color: var(--brand-2);
+  color: var(--brand-ink);
+}
+
+.btn--sm {
+  padding: 0.6rem 1rem;
+  font-size: 0.86rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Nút icon tròn */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: var(--r-full);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  box-shadow: var(--sh-1);
+  transition: transform var(--t) var(--ease), color var(--t) var(--ease),
+    border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+
+.icon-btn svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.icon-btn:hover {
+  transform: translateY(-2px);
+  color: var(--brand-ink);
+  border-color: var(--brand-2);
+  box-shadow: var(--sh-2);
+}
+
+/* =========================== THẺ =========================== */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-1);
+  transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease),
+    border-color var(--t) var(--ease);
+}
+
+.card--hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-3);
+  border-color: var(--line-strong);
+}
+
+/* Ô icon gradient dùng chung */
+.icon-tile {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--r-md);
+  color: #fff;
+  background: var(--grad-brand);
+  box-shadow: 0 10px 24px -12px rgba(124, 92, 246, 0.7);
+  flex: none;
+}
+
+.icon-tile svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.icon-tile--violet {
+  background: var(--grad-brand);
+}
+
+.icon-tile--pink {
+  background: linear-gradient(135deg, #f78cc1, #b79cf6);
+}
+.icon-tile--mint {
+  background: linear-gradient(135deg, #5fd4b0, #6cb8f6);
+}
+.icon-tile--sky {
+  background: linear-gradient(135deg, #6cb8f6, #a78bfa);
+}
+.icon-tile--peach {
+  background: linear-gradient(135deg, #ffb27a, #f78cc1);
+}
+
+/* Thẻ tag công nghệ */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--r-full);
+  background: var(--surface-3);
+  border: 1px solid var(--line);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: color var(--t) var(--ease), background-color var(--t) var(--ease);
+}
+
+.tag:hover {
+  color: var(--brand-ink);
+}
+
+/* ========================== HIỆU ỨNG ========================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(3%, -4%) scale(1.08);
+  }
+  66% {
+    transform: translate(-3%, 3%) scale(0.95);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
